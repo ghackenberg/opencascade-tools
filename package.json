@@ -6,11 +6,11 @@
     "author": {
         "name": "Georg Hackenberg",
         "email": "georg.hackenberg@fh-wels.at",
-        "url": "https://github.com/ghackenberg/"
+        "url": "https://github.com/ghackenberg"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/ghackenberg/opencascade.js-sandbox/",
+        "url": "https://github.com/ghackenberg/opencascade-typescript",
         "directory": "."
     },
     "scripts": {

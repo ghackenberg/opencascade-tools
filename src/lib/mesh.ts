@@ -1,6 +1,6 @@
 import { OpenCascadeInstance, TopoDS_Shape } from "opencascade.js/dist/opencascade.full"
 
-export function mesh(occ: OpenCascadeInstance, shapes: TopoDS_Shape[]) {
+export function triangulate(occ: OpenCascadeInstance, shapes: TopoDS_Shape[]) {
     console.log("Triangulating shapes")
 
     console.log("> Creating document")

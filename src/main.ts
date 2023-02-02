@@ -1,8 +1,8 @@
 import { readFileSync, writeFileSync } from 'fs'
 import initOpenCascade from 'opencascade.js/dist/node.js'
-import { convert } from './lib/convert.js'
-import { mesh } from './lib/mesh.js'
-import { parse } from './lib/parse.js'
+import { convert } from './lib/gltf.js'
+import { triangulate } from './lib/mesh.js'
+import { parse } from './lib/step.js'
 
 console.log("Initializing")
 
@@ -14,7 +14,7 @@ initOpenCascade().then(occ => {
     // Parse STEP data
     const shape = parse(occ, data)
     // Convert to mesh
-    const doc = mesh(occ, [shape])
+    const doc = triangulate(occ, [shape])
     // Convert to GLB
     const glb = convert(occ, doc)
 

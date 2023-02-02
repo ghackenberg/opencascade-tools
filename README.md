@@ -1,3 +1,15 @@
 # OpenCascade with TypeScript
 
-Coming soon ...
+## User guide
+
+### Install dependencies
+
+```
+npm install
+```
+
+### Execute scripts
+
+```
+npm start
+```
