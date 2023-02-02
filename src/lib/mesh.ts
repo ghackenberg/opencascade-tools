@@ -1,32 +1,30 @@
-import { OpenCascadeInstance, TopoDS_Shape } from "opencascade.js/dist/opencascade.full"
+import { OpenCascadeInstance, TopoDS_Shape } from "opencascade.js/dist/opencascade.full.js"
 
-export function triangulate(occ: OpenCascadeInstance, shapes: TopoDS_Shape[]) {
+export function triangulateShape(oc: OpenCascadeInstance, shape: TopoDS_Shape, linDeflection = 0.1, isRelative = false, angDeflection = 0.1, isInParallel = false) {
+    return triangulateShapes(oc, [shape], linDeflection, isRelative, angDeflection, isInParallel)
+}
+
+export function triangulateShapes(oc: OpenCascadeInstance, shapes: TopoDS_Shape[], linDeflection = 0.1, isRelative = false, angDeflection = 0.1, isInParallel = false) {
     console.log("Triangulating shapes")
 
+    console.log("> Creating string")
+    const format = new oc.TCollection_ExtendedString_1()
+
     console.log("> Creating document")
-
-    const format = new occ.TCollection_ExtendedString_1()
-
-    const doc = new occ.TDocStd_Document(format)
+    const doc = new oc.TDocStd_Document(format)
 
     console.log("> Creating tool")
-
-    const label = doc.Main()
-
-    const tool = occ.XCAFDoc_DocumentTool.ShapeTool(label).get()
+    const tool = oc.XCAFDoc_DocumentTool.ShapeTool(doc.Main()).get()
 
     console.log("> Processing shapes")
-
     for (const shape of shapes) {
         console.log("   > Processing shape")
 
         console.log ("    > Setting shape")
-
         tool.SetShape(tool.NewShape(), shape)
 
         console.log ("    > Triangulating shape")
-
-        new occ.BRepMesh_IncrementalMesh_2(shape, 0.1, false, 0.1, false)
+        new oc.BRepMesh_IncrementalMesh_2(shape, linDeflection, isRelative, angDeflection, isInParallel)
     }
 
     return doc
