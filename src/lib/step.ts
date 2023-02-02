@@ -35,7 +35,7 @@ export function parseAsShape(oc: OpenCascadeInstance, data: string) {
     return shape
 }
 
-export function parseAsDocument(oc: OpenCascadeInstance, data: string) {
+export function parseAsDocumentHandle(oc: OpenCascadeInstance, data: string) {
     console.log("Parsing data")
 
     console.log("> Creating reader")

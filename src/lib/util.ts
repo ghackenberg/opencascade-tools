@@ -6,11 +6,11 @@ import { parseAsShape } from "./step.js"
 
 export function convertStepToGltfData(oc: OpenCascadeInstance, stepData: string) {
     // Parse STEP data
-    const shape = parseAsShape(oc, stepData)
+    const stepShape = parseAsShape(oc, stepData)
     // Triangulate shape
-    const doc = triangulateShape(oc, shape)
+    const brepDoc = triangulateShape(oc, stepShape)
     // Convert to GLTF data
-    const gltfData = convertDocument(oc, doc)
+    const gltfData = convertDocument(oc, brepDoc)
     // Return GLTF data
     return gltfData
 }
