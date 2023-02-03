@@ -1,15 +1,45 @@
-# CLI for OpenCascade written in TypeScript
+# OpenCascade CLI
+
+This project provides a **command line interface (CLI)** for [Open CASCADE Technology](https://www.opencascade.com/open-cascade-technology/), a powerful free and open source CAD kernel.
+
+For now, you can use `opencascade-cli` to convert STEP files into OBJ/MTL files, GLB files, and GLTF files. For this conversion you need to triangulate the geometry data defined in STEP files. You can tune the triangulation quality using command line parameters.
 
 ## User guide
 
-### Install dependencies
+Convert STEP file with standard values for the parameters of the triangulation progress:
+
+```
+opencascade-cli <stepFile>
+```
+
+Convert STEP file with custom value for the linear deflection parameter of the triangulation process:
+
+```
+opencascade-cli --linDeflection 1 <stepFile>
+```
+
+Convert STEP file with custom value for the angular deflection parameter of the triangulation process:
+
+```
+opencascade-cli --angDeflection 1 <stepFile>
+```
+
+## Developer guide
+
+Install development and production dependencies:
 
 ```
 npm install
 ```
 
-### Execute scripts
+Run test case defined in `package.json`:
 
 ```
 npm start
+```
+
+Compile TypeScript sources to JavaScript "binaries":
+
+```
+npm run build
 ```
