@@ -10,7 +10,7 @@
         "url": "https://github.com/ghackenberg"
     },
     "scripts": {
-        "start": "ts-node-esm ./src/main.ts ./test/example.stp",
+        "start": "ts-node-esm ./src/main.ts --linDeflection 1 --angDeflection 5 ./test/hauser.stp",
         "build": "tsc"
     },
     "repository": {
@@ -19,6 +19,7 @@
         "directory": "."
     },
     "dependencies": {
+        "commander": "^10.0.0",
         "opencascade.js": "^2.0.0-beta.94e2944"
     },
     "devDependencies": {
