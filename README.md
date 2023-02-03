@@ -6,7 +6,7 @@ For now, you can use `opencascade-cli` to convert STEP files into OBJ/MTL files,
 
 ## User guide
 
-Install `opencascade-cli` using `npm` (coming soon):
+Install `opencascade-cli` using `npm` **(coming soon)**:
 
 ```
 npm install -g opencascade-cli
