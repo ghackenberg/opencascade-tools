@@ -3,13 +3,15 @@
     "version": "0.0.1",
     "description": "Sandbox for working with OpenCascade.js",
     "type": "module",
+    "main": "bin/main.js",
     "author": {
         "name": "Georg Hackenberg",
         "email": "georg.hackenberg@fh-wels.at",
         "url": "https://github.com/ghackenberg"
     },
     "scripts": {
-        "start": "ts-node-esm ./src/main.ts"
+        "start": "ts-node-esm ./src/main.ts example.stp",
+        "build": "tsc"
     },
     "repository": {
         "type": "git",
@@ -17,7 +19,9 @@
         "directory": "."
     },
     "dependencies": {
-        "opencascade.js": "^2.0.0-beta.94e2944",
+        "opencascade.js": "^2.0.0-beta.94e2944"
+    },
+    "devDependencies": {
         "ts-node": "^10.9.1",
         "typescript": "^4.9.5"
     }

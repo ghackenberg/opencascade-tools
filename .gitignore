@@ -2,5 +2,8 @@ node_modules
 
 package-lock.json
 
-*.glb
 *.stp
+*.obj
+*.mtl
+*.glb
+*.gltf

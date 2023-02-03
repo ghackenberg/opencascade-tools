@@ -1,29 +1,32 @@
-import { readFileSync, writeFileSync } from "fs"
 import initOpenCascade from 'opencascade.js/dist/node.js'
 import { triangulate } from "./lib/mesh.js"
-import { readStep } from './lib/read.js'
-import { writeGltf } from "./lib/write.js"
+import { readStepFile } from './lib/read/step.js'
+import { writeGlbFile } from './lib/write/glb.js'
+import { writeGltfFile } from './lib/write/gltf.js'
+import { writeObjMtlFile } from './lib/write/obj_mtl.js'
 
-console.log("Initializing WebAssembly version of OpenCascade")
+async function run() {
+    try {
 
-initOpenCascade().then(oc => {
-
-    console.log("WebAssembly version of OpenCascade initialized successfully")
-
-    const stepData = readFileSync("./hauser.stp", "ascii")
-
-    const stepDocHandle = readStep(oc, stepData)
-
-    triangulate(oc, stepDocHandle.get())
-
-    const gltfData = writeGltf(oc, stepDocHandle)
-
-    writeFileSync("./hauser.glb", gltfData)
-
-}).catch(error => {
-
-    console.log("WebAssembly version of OpenCascade could not be initialized")
+        console.log("Initializing WebAssembly version of OpenCascade")
     
-    console.error(error)
+        const oc = await initOpenCascade()
+    
+        console.log("WebAssembly version of OpenCascade initialized successfully")
+    
+        const stepDocHandle = readStepFile(oc, "./example.stp")
+    
+        triangulate(oc, stepDocHandle.get())
+    
+        writeObjMtlFile(oc, stepDocHandle, "./example.obj")
+        writeGlbFile(oc, stepDocHandle, "./example.glb")
+        writeGltfFile(oc, stepDocHandle, "./example.gltf")
 
-})
+    } catch (error) {
+
+        console.error(error)
+
+    }
+}
+
+run()

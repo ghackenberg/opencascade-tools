@@ -1,11 +1,17 @@
+import { readFileSync } from "fs"
 import { OpenCascadeInstance } from "opencascade.js/dist/opencascade.full.js"
 
 const NAME = "file.stp"
 const BASE = "."
 const PATH = `${BASE}/${NAME}`
 
-export function readStep(oc: OpenCascadeInstance, data: string) {
-    console.log("Parsing data")
+export function readStepFile(oc: OpenCascadeInstance, path: string) {
+    const data = readFileSync(path, "ascii")
+    return readStepData(oc, data)   
+}
+
+export function readStepData(oc: OpenCascadeInstance, data: string) {
+    console.log("Reading STEP")
 
     console.log("> Creating reader")
     const reader = new oc.STEPCAFControl_Reader_1()
