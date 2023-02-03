@@ -4,16 +4,7 @@ const NAME = "file.glb"
 const BASE = "."
 const PATH = `${BASE}/${NAME}`
 
-export function convertDocument(oc: OpenCascadeInstance, doc: TDocStd_Document) {
-    console.log("Converting shapes")
-
-    console.log("> Creating handle")
-    const handle = new oc.Handle_TDocStd_Document_2(doc)
-
-    return convertDocumentHandle(oc, handle)
-}
-
-export function convertDocumentHandle(oc: OpenCascadeInstance, handle: Handle_TDocStd_Document) {
+export function writeGltf(oc: OpenCascadeInstance, handle: Handle_TDocStd_Document) {
     console.log("Converting shapes")
 
     console.log("> Creating map")

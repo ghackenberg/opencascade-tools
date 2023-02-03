@@ -1,20 +1,21 @@
 import { readFileSync, writeFileSync } from "fs"
 import initOpenCascade from 'opencascade.js/dist/node.js'
-import { convertDocumentHandle } from "./lib/gltf.js"
-import { triangulateDocument } from "./lib/mesh.js"
-import { parseAsDocumentHandle } from './lib/step.js'
-import { convertStepToGltfFile } from './lib/util.js'
+import { triangulate } from "./lib/mesh.js"
+import { readStep } from './lib/read.js'
+import { writeGltf } from "./lib/write.js"
 
 console.log("Initializing")
 
 initOpenCascade().then(oc => {
     console.log("Initialized")
 
-    const stepHandle = parseAsDocumentHandle(oc, readFileSync("./hauser.stp", "ascii"))
+    const stepData = readFileSync("./hauser.stp", "ascii")
 
-    triangulateDocument(oc, stepHandle.get())
+    const stepHandle = readStep(oc, stepData)
 
-    const gltfData = convertDocumentHandle(oc, stepHandle)
+    triangulate(oc, stepHandle.get())
+
+    const gltfData = writeGltf(oc, stepHandle)
 
     writeFileSync("./hauser.glb", gltfData)
 

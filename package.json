@@ -8,13 +8,13 @@
         "email": "georg.hackenberg@fh-wels.at",
         "url": "https://github.com/ghackenberg"
     },
+    "scripts": {
+        "start": "ts-node-esm ./src/main.ts"
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/ghackenberg/opencascade-typescript",
         "directory": "."
-    },
-    "scripts": {
-        "start": "ts-node --esm src/main.ts"
     },
     "dependencies": {
         "opencascade.js": "^2.0.0-beta.94e2944",
