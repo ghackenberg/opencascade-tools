@@ -1,13 +1,16 @@
 {
-    "name": "opencascade.js-sandbox",
+    "name": "opencascade-cli",
     "version": "0.0.1",
-    "description": "Sandbox for working with OpenCascade.js",
+    "description": "Command line interface for OpenCascade",
     "type": "module",
     "main": "bin/main.js",
     "author": {
         "name": "Georg Hackenberg",
         "email": "georg.hackenberg@fh-wels.at",
         "url": "https://github.com/ghackenberg"
+    },
+    "bin": {
+        "opencascade-cli": "./bin/main.js"
     },
     "scripts": {
         "start": "ts-node-esm ./src/main.ts --linDeflection 1 --angDeflection 5 ./test/hauser.stp",
