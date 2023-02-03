@@ -3,6 +3,7 @@
         "module": "ESNext",
         "moduleResolution": "node",
         "rootDir": "src",
-        "outDir": "bin"
+        "outDir": "bin",
+        "skipLibCheck": true
     }
 }
