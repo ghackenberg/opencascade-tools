@@ -1,4 +1,4 @@
-import { OpenCascadeInstance, TDocStd_Document, TopoDS_Shape } from "opencascade.js/dist/opencascade.full.js"
+import { OpenCascadeInstance, TDocStd_Document } from "opencascade.js/dist/opencascade.full.js"
 
 export function triangulate(oc: OpenCascadeInstance, doc: TDocStd_Document, linDeflection = 0.1, isRelative = false, angDeflection = 0.1, isInParallel = false) {
     console.log("Triangulating shapes")

@@ -30,13 +30,13 @@ export function readStep(oc: OpenCascadeInstance, data: string) {
     const doc = new oc.TDocStd_Document(format)
 
     console.log("> Creating handle")
-    const handle = new oc.Handle_TDocStd_Document_2(doc)
+    const docHandle = new oc.Handle_TDocStd_Document_2(doc)
 
     console.log("> Creating progress")
     const progress = new oc.Message_ProgressRange_1()
 
     console.log("> Transferring data")
-    reader.Transfer_1(handle, progress)
+    reader.Transfer_1(docHandle, progress)
 
-    return handle
+    return docHandle
 }

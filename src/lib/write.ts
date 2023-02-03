@@ -1,10 +1,10 @@
-import { Handle_TDocStd_Document, OpenCascadeInstance, TDocStd_Document } from "opencascade.js/dist/opencascade.full.js"
+import { Handle_TDocStd_Document, OpenCascadeInstance } from "opencascade.js/dist/opencascade.full.js"
 
 const NAME = "file.glb"
 const BASE = "."
 const PATH = `${BASE}/${NAME}`
 
-export function writeGltf(oc: OpenCascadeInstance, handle: Handle_TDocStd_Document) {
+export function writeGltf(oc: OpenCascadeInstance, docHandle: Handle_TDocStd_Document) {
     console.log("Converting shapes")
 
     console.log("> Creating map")
@@ -20,7 +20,7 @@ export function writeGltf(oc: OpenCascadeInstance, handle: Handle_TDocStd_Docume
     const writer = new oc.RWGltf_CafWriter(file, true)
     
     console.log("> Writing file")
-    writer.Perform_2(handle, map, progress)
+    writer.Perform_2(docHandle, map, progress)
 
     console.log("> Reading file")
     const data = oc.FS.readFile(PATH, { encoding: "binary" })
