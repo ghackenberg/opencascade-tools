@@ -1,4 +1,4 @@
-# OpenCascade with TypeScript
+# CLI for OpenCascade written in TypeScript
 
 ## User guide
 
