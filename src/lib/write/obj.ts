@@ -2,10 +2,10 @@ import { writeFileSync } from "fs"
 import { basename, dirname } from "path"
 import { Handle_TDocStd_Document, OpenCascadeInstance } from "opencascade.js/dist/opencascade.full.js"
 
-export function writeObjMtlFile(oc: OpenCascadeInstance, docHandle: Handle_TDocStd_Document, objPath: string) {
+export function writeObjFile(oc: OpenCascadeInstance, docHandle: Handle_TDocStd_Document, objPath: string) {
     const objPathInternal = `./${basename(objPath)}`
 
-    const { objData, mtlData, mtlPath } = writeObjMtlData(oc, docHandle, objPathInternal)
+    const { objData, mtlData, mtlPath } = writeObjData(oc, docHandle, objPathInternal)
 
     objData && writeFileSync(objPath, objData)
 
@@ -14,11 +14,11 @@ export function writeObjMtlFile(oc: OpenCascadeInstance, docHandle: Handle_TDocS
     mtlData && writeFileSync(mtlPathExternal, mtlData)
 }
 
-export function writeObjMtlData(oc: OpenCascadeInstance, docHandle: Handle_TDocStd_Document, objPath: string = "./output.obj") {
-    return writeObjMtlInternal(oc, docHandle, objPath)
+export function writeObjData(oc: OpenCascadeInstance, docHandle: Handle_TDocStd_Document, objPath: string = "./output.obj") {
+    return writeObjInternal(oc, docHandle, objPath)
 }
 
-function writeObjMtlInternal(oc: OpenCascadeInstance, docHandle: Handle_TDocStd_Document, objPath: string) {
+function writeObjInternal(oc: OpenCascadeInstance, docHandle: Handle_TDocStd_Document, objPath: string) {
     console.log("> Writing OBJ/MTL")
     const mtlPath = `${objPath.substring(0, objPath.lastIndexOf("."))}.mtl`
 

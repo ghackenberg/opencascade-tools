@@ -7,5 +7,6 @@ bin
 *.stp
 *.obj
 *.mtl
-*.glb
 *.gltf
+*.bin
+*.glb

@@ -6,7 +6,7 @@ import { triangulate } from "./lib/mesh.js"
 import { readStepFile } from './lib/read/step.js'
 import { writeGlbFile } from './lib/write/glb.js'
 import { writeGltfFile } from './lib/write/gltf.js'
-import { writeObjMtlFile } from './lib/write/obj_mtl.js'
+import { writeObjFile } from './lib/write/obj.js'
 
 async function processStep(oc: OpenCascadeInstance, stepPath: string, linDeflection = 0.1, isRelative = false, angDeflection = 0.1, isInParallel = false) {
 
@@ -17,12 +17,12 @@ async function processStep(oc: OpenCascadeInstance, stepPath: string, linDeflect
     triangulate(oc, stepDocHandle.get(), linDeflection, isRelative, angDeflection, isInParallel)
 
     const objPath = `${dirname(stepPath)}/${basename(stepPath, ".stp")}.obj`
-    const glbPath = `${dirname(stepPath)}/${basename(stepPath, ".stp")}.glb`
     const gltfPath = `${dirname(stepPath)}/${basename(stepPath, ".stp")}.gltf`
+    const glbPath = `${dirname(stepPath)}/${basename(stepPath, ".stp")}.glb`
 
-    writeObjMtlFile(oc, stepDocHandle, objPath)
-    writeGlbFile(oc, stepDocHandle, glbPath)
+    writeObjFile(oc, stepDocHandle, objPath)
     writeGltfFile(oc, stepDocHandle, gltfPath)
+    writeGlbFile(oc, stepDocHandle, glbPath)
 
 }
 

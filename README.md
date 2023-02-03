@@ -2,7 +2,7 @@
 
 This project provides a **command line interface (CLI)** for [Open CASCADE Technology](https://www.opencascade.com/open-cascade-technology/), a powerful free and open source CAD kernel.
 
-For now, you can use `opencascade-cli` to convert STEP files into OBJ/MTL files, GLB files, and GLTF files. For this conversion you need to triangulate the geometry data defined in STEP files. You can tune the triangulation quality using command line parameters.
+For now, you can use `opencascade-cli` to convert [STEP files](https://en.wikipedia.org/wiki/ISO_10303-21) into [OBJ files](https://en.wikipedia.org/wiki/Wavefront_.obj_file) as well as [GLTF/GLB files](https://en.wikipedia.org/wiki/GlTF). For this conversion you need to triangulate the geometry data defined in STEP files. You can tune the triangulation quality using command line parameters.
 
 ## User guide
 
