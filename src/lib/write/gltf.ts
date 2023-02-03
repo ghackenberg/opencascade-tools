@@ -15,27 +15,27 @@ export function writeGltfData(oc: OpenCascadeInstance, docHandle: Handle_TDocStd
 }
 
 function writeGltfInternal(oc: OpenCascadeInstance, docHandle: Handle_TDocStd_Document, path: string) {
-    console.log("Writing GTLF")
+    console.log("> Writing GTLF")
 
-    console.log("> Creating map")
+    console.debug("  > Creating map")
     const map = new oc.TColStd_IndexedDataMapOfStringString_1()
 
-    console.log("> Creating progress")
+    console.debug("  > Creating progress")
     const progress = new oc.Message_ProgressRange_1()
 
-    console.log("> Creating file")
+    console.debug("  > Creating file")
     const file = new oc.TCollection_AsciiString_2(path)
 
-    console.log("> Creating writer")
+    console.debug("  > Creating writer")
     const writer = new oc.RWGltf_CafWriter(file, false)
     
-    console.log("> Writing file")
+    console.debug("  > Writing file")
     writer.Perform_2(docHandle, map, progress)
 
-    console.log("> Reading file")
+    console.debug("  > Reading file")
     const data = oc.FS.analyzePath(path).exists && oc.FS.readFile(path)
 
-    console.log("> Deleting file")
+    console.debug("  > Deleting file")
     data && oc.FS.unlink(path)
 
     return data

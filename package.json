@@ -10,7 +10,7 @@
         "url": "https://github.com/ghackenberg"
     },
     "scripts": {
-        "start": "ts-node-esm ./src/main.ts example.stp",
+        "start": "ts-node-esm ./src/main.ts ./test/example.stp",
         "build": "tsc"
     },
     "repository": {

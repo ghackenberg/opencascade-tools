@@ -19,34 +19,34 @@ export function writeObjMtlData(oc: OpenCascadeInstance, docHandle: Handle_TDocS
 }
 
 function writeObjMtlInternal(oc: OpenCascadeInstance, docHandle: Handle_TDocStd_Document, objPath: string) {
-    console.log("Writing OBJ/MTL")
+    console.log("> Writing OBJ/MTL")
     const mtlPath = `${objPath.substring(0, objPath.lastIndexOf("."))}.mtl`
 
-    console.log("> Creating map")
+    console.debug("  > Creating map")
     const map = new oc.TColStd_IndexedDataMapOfStringString_1()
 
-    console.log("> Creating progress")
+    console.debug("  > Creating progress")
     const progress = new oc.Message_ProgressRange_1()
 
-    console.log("> Creating file")
+    console.debug("  > Creating file")
     const file = new oc.TCollection_AsciiString_2(objPath)
 
-    console.log("> Creating writer")
+    console.debug("  > Creating writer")
     const writer = new oc.RWObj_CafWriter(file)
 
-    console.log("> Writing OBJ/MTL files")
+    console.debug("  > Writing OBJ/MTL files")
     writer.Perform_2(docHandle, map, progress)
 
-    console.log("> Reading OBJ file")
+    console.debug("  > Reading OBJ file")
     const objData = oc.FS.analyzePath(objPath).exists && oc.FS.readFile(objPath)
 
-    console.log("> Reading MTL file")
+    console.debug("  > Reading MTL file")
     const mtlData = oc.FS.analyzePath(mtlPath).exists && oc.FS.readFile(mtlPath)
 
-    console.log("> Deleting OBJ file")
+    console.debug("  > Deleting OBJ file")
     objData && oc.FS.unlink(objPath)
 
-    console.log("> Deleting MTL file")
+    console.debug("  > Deleting MTL file")
     mtlData && oc.FS.unlink(mtlPath)
 
     return { objData, mtlData, mtlPath }
