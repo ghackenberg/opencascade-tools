@@ -6,40 +6,52 @@ For now, you can use `opencascade-cli` to convert STEP files into OBJ/MTL files,
 
 ## User guide
 
+Install `opencascade-cli` using `npm` (coming soon):
+
+```
+npm install -g opencascade-cli
+```
+
 Convert STEP file with standard values for the parameters of the triangulation progress:
 
 ```
-opencascade-cli <stepFile>
+opencascade-cli <path/to/stepFile>
 ```
 
 Convert STEP file with custom value for the linear deflection parameter of the triangulation process:
 
 ```
-opencascade-cli --linDeflection 1 <stepFile>
+opencascade-cli --linDeflection 1 <path/to/stepFile>
 ```
 
 Convert STEP file with custom value for the angular deflection parameter of the triangulation process:
 
 ```
-opencascade-cli --angDeflection 1 <stepFile>
+opencascade-cli --angDeflection 1 <path/to/stepFile>
 ```
 
 ## Developer guide
 
+Clone the Git repository:
+
+```
+git clone https://github.com/ghackenberg/opencascade-cli.git
+```
+
 Install development and production dependencies:
 
 ```
-npm install
+cd opencascade-cli && npm install
 ```
 
 Run test case defined in `package.json`:
 
 ```
-npm start
+cd opencascade-cli && npm start
 ```
 
 Compile TypeScript sources to JavaScript "binaries":
 
 ```
-npm run build
+cd opencascade-cli && npm run build
 ```
