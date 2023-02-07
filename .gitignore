@@ -5,11 +5,6 @@ package-lock.json
 bin
 dts
 
-*.stp
-*.obj
-*.mtl
-*.gltf
-*.bin
-*.glb
+test
 
 *.tgz

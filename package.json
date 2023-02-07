@@ -29,7 +29,7 @@
     },
     "dependencies": {
         "commander": "^10.0.0",
-        "opencascade.js": "^2.0.0-beta.94e2944"
+        "opencascade.js": "2.0.0-beta.94e2944"
     },
     "devDependencies": {
         "ts-node": "^10.9.1",
