@@ -11,3 +11,5 @@ dts
 *.gltf
 *.bin
 *.glb
+
+*.tgz
