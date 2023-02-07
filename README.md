@@ -14,19 +14,19 @@ npm install -g opencascade-tools
 
 ### Command line interface (CLI)
 
-Convert STEP file with standard values for the parameters of the triangulation progress:
+Convert STEP file to OBJ, GLTF, and GLB files with standard values for the parameters of the triangulation progress:
 
 ```
 opencascade-tools <path/to/stepFile>
 ```
 
-Convert STEP file with custom value for the linear deflection parameter of the triangulation process:
+Convert STEP file to OBJ, GLTF, and GLB files with custom value for the linear deflection parameter of the triangulation process:
 
 ```
 opencascade-tools --linDeflection 1 <path/to/stepFile>
 ```
 
-Convert STEP file with custom value for the angular deflection parameter of the triangulation process:
+Convert STEP file to OBJ, GLTF, and GLB files with custom value for the angular deflection parameter of the triangulation process:
 
 ```
 opencascade-tools --angDeflection 1 <path/to/stepFile>
@@ -34,7 +34,7 @@ opencascade-tools --angDeflection 1 <path/to/stepFile>
 
 ### Application programming interface (API)
 
-Convert STEP file with standard values for the parameters of the triangulation progress:
+Convert STEP file to OBJ, GLTF, and GLB files with standard values for the parameters of the triangulation progress:
 
 ```ts
 import { init, readStep, triangulate, writeObj, writeGltf, writeGlb } from 'opencascade-tools'
