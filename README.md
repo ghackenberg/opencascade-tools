@@ -14,19 +14,19 @@ npm install -g opencascade-tools
 
 ### Command line interface (CLI)
 
-Convert STEP file to OBJ, GLTF, and GLB files with standard values for the parameters of the triangulation progress:
+Convert STEP file to OBJ file, GLTF file, and GLB file with standard values for the parameters of the triangulation progress:
 
 ```
 opencascade-tools <path/to/stepFile>
 ```
 
-Convert STEP file to OBJ, GLTF, and GLB files with custom value for the linear deflection parameter of the triangulation process:
+Convert STEP file to OBJ file, GLTF file, and GLB file with custom value for the linear deflection parameter of the triangulation process:
 
 ```
 opencascade-tools --linDeflection 1 <path/to/stepFile>
 ```
 
-Convert STEP file to OBJ, GLTF, and GLB files with custom value for the angular deflection parameter of the triangulation process:
+Convert STEP file to OBJ file, GLTF file, and GLB file with custom value for the angular deflection parameter of the triangulation process:
 
 ```
 opencascade-tools --angDeflection 1 <path/to/stepFile>
@@ -34,7 +34,7 @@ opencascade-tools --angDeflection 1 <path/to/stepFile>
 
 ### Application programming interface (API)
 
-Convert STEP file to OBJ, GLTF, and GLB files with standard values for the parameters of the triangulation progress:
+Convert STEP file to OBJ file, GLTF file, and GLB file with standard values for the parameters of the triangulation progress:
 
 ```ts
 import { init, readStep, triangulate, writeObj, writeGltf, writeGlb } from 'opencascade-tools'
@@ -43,6 +43,31 @@ async function run() {
     const oc = init()
 
     const docHandle = readStep(oc, '<path/to/stepFile>')
+
+    triangulate(oc, docHandle.get())
+
+    writeObjFile(oc, docHandle, '<path/to/objFile>')
+    writeGltfFile(oc, docHandle, '<path/to/gltfFile>')
+    writeGlbFile(oc, docHandle, '<path/to/glbFile>')
+}
+
+run()
+```
+
+Convert STEP file to OBJ file, GLTF file, and GLB file with custom values for the parameters of the triangulation progress:
+
+```ts
+import { init, readStep, triangulate, writeObj, writeGltf, writeGlb } from 'opencascade-tools'
+
+async function run() {
+    const oc = init()
+
+    const linDeflection = 0.1
+    const isRelative = false
+    const angDeflection = 0.1
+    const isInParallel = false
+
+    const docHandle = readStep(oc, '<path/to/stepFile>', linDeflection, isRelative, angDeflection, isInParallel)
 
     triangulate(oc, docHandle.get())
 
