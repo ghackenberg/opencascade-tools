@@ -1,6 +1,6 @@
 {
     "name": "opencascade-tools",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "Easy-to-use wrapper around OpenCASCADE Technology",
     "license": "MIT",
     "type": "module",
@@ -21,6 +21,9 @@
         "node": ">=16.19.0",
         "npm": ">=9.3.1"
     },
+    "keywords": [
+        "opencascade", "computer-aided design", "cad", "step", "wavefront", "obj", "mtl", "khronos", "gltf", "glb", "webassembly", "3d"
+    ],
     "bin": {
         "opencascade-tools": "./bin/main.js"
     },
