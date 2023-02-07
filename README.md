@@ -40,7 +40,7 @@ Convert STEP file to OBJ file, GLTF file, and GLB file with standard values for 
 import { init, readStep, triangulate, writeObj, writeGltf, writeGlb } from 'opencascade-tools'
 
 async function run() {
-    const oc = init()
+    const oc = await init()
 
     const docHandle = readStep(oc, '<path/to/stepFile>')
 
@@ -60,7 +60,7 @@ Convert STEP file to OBJ file, GLTF file, and GLB file with custom values for th
 import { init, readStep, triangulate, writeObj, writeGltf, writeGlb } from 'opencascade-tools'
 
 async function run() {
-    const oc = init()
+    const oc = await init()
 
     const linDeflection = 0.1
     const isRelative = false
