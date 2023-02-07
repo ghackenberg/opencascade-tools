@@ -1,12 +1,7 @@
 import { program } from 'commander'
-import initOpenCascade from 'opencascade.js/dist/node.js'
 import { OpenCascadeInstance } from 'opencascade.js/dist/opencascade.full.js'
 import { basename, dirname } from "path"
-import { triangulate } from "./lib/mesh.js"
-import { readStepFile } from './lib/read/step.js'
-import { writeGlbFile } from './lib/write/glb.js'
-import { writeGltfFile } from './lib/write/gltf.js'
-import { writeObjFile } from './lib/write/obj.js'
+import { init, readStepFile, triangulate, writeGlbFile, writeGltfFile, writeObjFile } from './api/node.js'
 
 async function processStep(oc: OpenCascadeInstance, stepPath: string, linDeflection = 0.1, isRelative = false, angDeflection = 0.1, isInParallel = false) {
 
@@ -27,21 +22,9 @@ async function processStep(oc: OpenCascadeInstance, stepPath: string, linDeflect
 }
 
 async function run() {
-    try {
+    const oc = await init()
 
-        console.log("Initializing WebAssembly version of OpenCascade")
-    
-        const oc = await initOpenCascade()
-    
-        console.log("WebAssembly version of OpenCascade initialized successfully")
-
-        processStep(oc, stepFile, linDeflection, isRelative, angDeflection, isInParallel)
-
-    } catch (error) {
-
-        console.error(error)
-
-    }
+    processStep(oc, stepPath, linDeflection, isRelative, angDeflection, isInParallel)
 }
 
 program.name("opencascade-typescript")
@@ -68,7 +51,7 @@ const angDeflection = parseFloat(options["angDeflection"])
 const isRelative = options["isRelative"]
 const isInParallel = options["isInParallel"]
 
-const stepFile = program.args[0]
+const stepPath = program.args[0]
 
 console.debug = options["debug"] ? console.debug : () => {}
 
