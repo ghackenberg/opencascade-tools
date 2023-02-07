@@ -36,6 +36,12 @@ opencascade-tools --angDeflection 1 <path/to/stepFile>
 
 *Coming soon!*
 
+```ts
+import { readStep } from 'opencascade-tools'
+
+readStep(oc)
+```
+
 ## Developer guide
 
 Clone the Git repository:
