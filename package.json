@@ -1,7 +1,7 @@
 {
     "name": "opencascade-tools",
     "version": "0.0.1",
-    "description": "Command line interface for OpenCascade",
+    "description": "Easy-to-use wrapper around OpenCASCADE Technology",
     "type": "module",
     "main": "bin/api/node.js",
     "browser": "bin/api/browser.js",

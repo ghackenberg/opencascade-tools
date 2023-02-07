@@ -1,6 +1,6 @@
 # OpenCascade Tools
 
-This project provides an easy-to-use wrapper around [Open CASCADE Technology](https://www.opencascade.com/open-cascade-technology/), a powerful free and open source computer-aided design (CAD) kernel.
+This project provides an **easy-to-use wrapper** around [Open CASCADE Technology](https://www.opencascade.com/open-cascade-technology/), a powerful free and open source computer-aided design (CAD) kernel. The project is based on [OpenCascade.js](https://github.com/donalffons/opencascade.js/), a WebAssembly port of the original native C++ library.
 
 For now, you can use `opencascade-tools` to convert [STEP files](https://en.wikipedia.org/wiki/ISO_10303-21) into [OBJ files](https://en.wikipedia.org/wiki/Wavefront_.obj_file) (Wavefront Technologies) as well as [GLTF/GLB files](https://en.wikipedia.org/wiki/GlTF) (Khronos Group). In the future, we plan to add more functionality depending on community requests.
 
