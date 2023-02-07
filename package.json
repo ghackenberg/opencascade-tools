@@ -4,6 +4,7 @@
     "description": "Command line interface for OpenCascade",
     "type": "module",
     "main": "bin/main.js",
+    "types": "dts/main.d.ts",
     "author": {
         "name": "Georg Hackenberg",
         "email": "georg.hackenberg@fh-wels.at",

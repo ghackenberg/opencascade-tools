@@ -4,6 +4,8 @@
         "moduleResolution": "node",
         "rootDir": "src",
         "outDir": "bin",
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "declaration": true,
+        "declarationDir": "dts"
     }
 }
