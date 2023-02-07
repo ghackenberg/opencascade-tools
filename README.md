@@ -34,12 +34,24 @@ opencascade-tools --angDeflection 1 <path/to/stepFile>
 
 ### Application programming interface (API)
 
-*Coming soon!*
+Convert STEP file with standard values for the parameters of the triangulation progress:
 
 ```ts
-import { readStep } from 'opencascade-tools'
+import { init, readStep, triangulate, writeObj, writeGltf, writeGlb } from 'opencascade-tools'
 
-readStep(oc)
+async function run() {
+    const oc = init()
+
+    const docHandle = readStep(oc, '<path/to/stepFile>')
+
+    triangulate(oc, docHandle.get())
+
+    writeObjFile(oc, docHandle, '<path/to/objFile>')
+    writeGltfFile(oc, docHandle, '<path/to/gltfFile>')
+    writeGlbFile(oc, docHandle, '<path/to/glbFile>')
+}
+
+run()
 ```
 
 ## Developer guide
