@@ -2,6 +2,7 @@
     "name": "opencascade-tools",
     "version": "0.0.1",
     "description": "Easy-to-use wrapper around OpenCASCADE Technology",
+    "license": "MIT",
     "type": "module",
     "main": "bin/api/node.js",
     "browser": "bin/api/browser.js",
