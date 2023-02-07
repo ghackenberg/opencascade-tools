@@ -1,5 +1,5 @@
 {
-    "name": "opencascade-cli",
+    "name": "opencascade-tools",
     "version": "0.0.1",
     "description": "Command line interface for OpenCascade",
     "type": "module",
@@ -10,17 +10,21 @@
         "email": "georg.hackenberg@fh-wels.at",
         "url": "https://github.com/ghackenberg"
     },
-    "bin": {
-        "opencascade-cli": "./bin/main.js"
-    },
-    "scripts": {
-        "start": "ts-node-esm ./src/main.ts --linDeflection 1 --angDeflection 5 ./test/hauser.stp",
-        "build": "tsc"
-    },
     "repository": {
         "type": "git",
         "url": "https://github.com/ghackenberg/opencascade-typescript",
         "directory": "."
+    },
+    "engines": {
+        "node": ">=16.19.0",
+        "npm": ">=9.3.1"
+    },
+    "bin": {
+        "opencascade-tools": "./bin/main.js"
+    },
+    "scripts": {
+        "start": "ts-node-esm ./src/main.ts --linDeflection 1 --angDeflection 5 ./test/hauser.stp",
+        "build": "tsc"
     },
     "dependencies": {
         "commander": "^10.0.0",
