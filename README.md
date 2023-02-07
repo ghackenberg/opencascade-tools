@@ -6,7 +6,7 @@ For now, you can use `opencascade-tools` to convert [STEP files](https://en.wiki
 
 ## User guide
 
-Install `opencascade-tools` using `npm` **(coming soon)**:
+Install `opencascade-tools` using `npm`:
 
 ```
 npm install -g opencascade-tools
