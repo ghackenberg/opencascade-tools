@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { program } from 'commander'
 import { OpenCascadeInstance } from 'opencascade.js/dist/opencascade.full.js'
 import { basename, dirname } from "path"
