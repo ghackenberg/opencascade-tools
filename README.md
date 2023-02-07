@@ -1,57 +1,63 @@
-# OpenCascade CLI
+# OpenCascade Tools
 
-This project provides a **command line interface (CLI)** for [Open CASCADE Technology](https://www.opencascade.com/open-cascade-technology/), a powerful free and open source CAD kernel.
+This project provides an easy-to-use wrapper around [Open CASCADE Technology](https://www.opencascade.com/open-cascade-technology/), a powerful free and open source computer-aided design (CAD) kernel.
 
-For now, you can use `opencascade-cli` to convert [STEP files](https://en.wikipedia.org/wiki/ISO_10303-21) into [OBJ files](https://en.wikipedia.org/wiki/Wavefront_.obj_file) as well as [GLTF/GLB files](https://en.wikipedia.org/wiki/GlTF). For this conversion you need to triangulate the geometry data defined in STEP files. You can tune the triangulation quality using command line parameters.
+For now, you can use `opencascade-tools` to convert [STEP files](https://en.wikipedia.org/wiki/ISO_10303-21) into [OBJ files](https://en.wikipedia.org/wiki/Wavefront_.obj_file) as well as [GLTF/GLB files](https://en.wikipedia.org/wiki/GlTF). In the future, we plan to add more functionality depending on community requests.
 
 ## User guide
 
-Install `opencascade-cli` using `npm` **(coming soon)**:
+Install `opencascade-tools` using `npm` **(coming soon)**:
 
 ```
-npm install -g opencascade-cli
+npm install -g opencascade-tools
 ```
+
+### Command line interface (CLI)
 
 Convert STEP file with standard values for the parameters of the triangulation progress:
 
 ```
-opencascade-cli <path/to/stepFile>
+opencascade-tools <path/to/stepFile>
 ```
 
 Convert STEP file with custom value for the linear deflection parameter of the triangulation process:
 
 ```
-opencascade-cli --linDeflection 1 <path/to/stepFile>
+opencascade-tools --linDeflection 1 <path/to/stepFile>
 ```
 
 Convert STEP file with custom value for the angular deflection parameter of the triangulation process:
 
 ```
-opencascade-cli --angDeflection 1 <path/to/stepFile>
+opencascade-tools --angDeflection 1 <path/to/stepFile>
 ```
+
+### Application programming interface (API)
+
+*Coming soon!*
 
 ## Developer guide
 
 Clone the Git repository:
 
 ```
-git clone https://github.com/ghackenberg/opencascade-cli.git
+git clone https://github.com/ghackenberg/opencascade-tools.git
 ```
 
 Install development and production dependencies:
 
 ```
-cd opencascade-cli && npm install
+cd opencascade-tools && npm install
 ```
 
 Run test case defined in `package.json`:
 
 ```
-cd opencascade-cli && npm start
+cd opencascade-tools && npm start
 ```
 
 Compile TypeScript sources to JavaScript "binaries":
 
 ```
-cd opencascade-cli && npm run build
+cd opencascade-tools && npm run build
 ```
