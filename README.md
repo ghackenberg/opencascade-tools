@@ -4,15 +4,21 @@ This project provides an **easy-to-use wrapper** around [Open CASCADE Technology
 
 For now, you can use `opencascade-tools` to convert [STEP files](https://en.wikipedia.org/wiki/ISO_10303-21) into [OBJ files](https://en.wikipedia.org/wiki/Wavefront_.obj_file) (Wavefront Technologies) as well as [GLTF/GLB files](https://en.wikipedia.org/wiki/GlTF) (Khronos Group). In the future, we plan to add more functionality depending on community requests.
 
+Below you find a short *user guide* and an even shorter *developer guide* 😉.
+
 ## User guide
 
-Install `opencascade-tools` using `npm`:
+Install `opencascade-tools` on your machine (requires [Node.js](https://nodejs.org/) and the [Node Package Manager (NPM)](https://www.npmjs.com/package/npm)):
 
 ```
 npm install -g opencascade-tools
 ```
 
+Afterwards you can use our *command line interface (CLI)* and/or our *application programming interface (API)*.
+
 ### Command line interface (CLI)
+
+Our CLI provides a few *general functions* (as the CLI of most CLI-based programs) and some (domain-) *specific functions*:
 
 #### General functions
 
