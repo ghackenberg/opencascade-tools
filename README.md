@@ -96,7 +96,7 @@ cd opencascade-tools && npm install
 Run test case defined in `package.json`:
 
 ```
-cd opencascade-tools && npm start
+cd opencascade-tools && npm run test
 ```
 
 Compile TypeScript sources to JavaScript "binaries":
