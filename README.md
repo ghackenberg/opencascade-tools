@@ -14,22 +14,22 @@ npm install -g opencascade-tools
 
 ### Command line interface (CLI)
 
-Convert STEP file to OBJ file, GLTF file, and GLB file with standard values for the parameters of the triangulation progress:
+Convert STEP file to OBJ file, GLTF file, or GLB file with standard values for the parameters of the triangulation progress:
 
 ```
-opencascade-tools <path/to/stepFile>
+opencascade-tools --format <obj|gltf|glb> <path/to/stepFile>
 ```
 
-Convert STEP file to OBJ file, GLTF file, and GLB file with custom value for the linear deflection parameter of the triangulation process:
+Convert STEP file to OBJ file, GLTF file, or GLB file with custom value for the linear deflection parameter of the triangulation process:
 
 ```
-opencascade-tools --linDeflection 1 <path/to/stepFile>
+opencascade-tools --format <obj|gltf|glb> --linDeflection 1 <path/to/stepFile>
 ```
 
-Convert STEP file to OBJ file, GLTF file, and GLB file with custom value for the angular deflection parameter of the triangulation process:
+Convert STEP file to OBJ file, GLTF file, or GLB file with custom value for the angular deflection parameter of the triangulation process:
 
 ```
-opencascade-tools --angDeflection 1 <path/to/stepFile>
+opencascade-tools --format <obj|gltf|glb> --angDeflection 1 <path/to/stepFile>
 ```
 
 ### Application programming interface (API)

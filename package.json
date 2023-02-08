@@ -1,6 +1,6 @@
 {
     "name": "opencascade-tools",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "Easy-to-use wrapper around OpenCASCADE Technology",
     "license": "MIT",
     "type": "module",
@@ -22,20 +22,38 @@
         "npm": ">=9.3.1"
     },
     "keywords": [
-        "opencascade", "computer-aided design", "cad", "step", "wavefront", "obj", "mtl", "khronos", "gltf", "glb", "webassembly", "3d"
+        "opencascade",
+        "computer-aided design",
+        "cad",
+        "step",
+        "wavefront",
+        "obj",
+        "mtl",
+        "khronos",
+        "gltf",
+        "glb",
+        "webassembly",
+        "3d"
     ],
     "bin": {
         "opencascade-tools": "./bin/main.js"
     },
     "scripts": {
-        "start": "ts-node-esm ./src/main.ts --linDeflection 1 --angDeflection 5 ./test/hauser.stp",
+        "test": "npm run test-help && npm run test-version && npm run test-obj && npm run test-gltf && npm run test-glb",
+        "test-help": "ts-node-esm ./src/main.ts --help",
+        "test-version": "ts-node-esm ./src/main.ts --version",
+        "test-obj": "ts-node-esm ./src/main.ts --format obj --linDeflection 1 --angDeflection 5 ./test/hauser.stp",
+        "test-gltf": "ts-node-esm ./src/main.ts --format gltf --linDeflection 1 --angDeflection 5 ./test/hauser.stp",
+        "test-glb": "ts-node-esm ./src/main.ts --format glb --linDeflection 1 --angDeflection 5 ./test/hauser.stp",
         "build": "tsc"
     },
     "dependencies": {
         "commander": "^10.0.0",
+        "figlet": "^1.5.2",
         "opencascade.js": "2.0.0-beta.94e2944"
     },
     "devDependencies": {
+        "@types/figlet": "^1.5.5",
         "ts-node": "^10.9.1",
         "typescript": "^4.9.5"
     }
