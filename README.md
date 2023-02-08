@@ -93,7 +93,7 @@ Install development and production dependencies:
 cd opencascade-tools && npm install
 ```
 
-Run test case defined in `package.json`:
+Run test cases defined in `package.json`:
 
 ```
 cd opencascade-tools && npm run test
