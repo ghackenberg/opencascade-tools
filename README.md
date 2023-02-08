@@ -1,4 +1,4 @@
-# OpenCascade Tools
+# opencascade-tools
 
 This project provides an **easy-to-use wrapper** around [Open CASCADE Technology](https://www.opencascade.com/open-cascade-technology/), a powerful free and open source computer-aided design (CAD) kernel. The project is based on [OpenCascade.js](https://github.com/donalffons/opencascade.js/), a WebAssembly port of the original native C++ library.
 
@@ -6,7 +6,7 @@ For now, you can use `opencascade-tools` to convert [STEP files](https://en.wiki
 
 Below you find a short *user guide* and an even shorter *developer guide* 😉.
 
-## User guide
+## 📙 User guide
 
 Install `opencascade-tools` on your machine (requires [Node.js](https://nodejs.org/) and the [Node Package Manager (NPM)](https://www.npmjs.com/package/npm)):
 
@@ -16,11 +16,11 @@ npm install -g opencascade-tools
 
 Afterwards you can use our *command line interface (CLI)* and/or our *application programming interface (API)*.
 
-### Command line interface (CLI)
+### 🖥️ Command line interface (CLI)
 
 Our CLI provides a few *general functions* (as the CLI of most CLI-based programs) and some (domain-) *specific functions*:
 
-#### General functions
+#### ⚙️ General functions
 
 Get help on how to use the command line interface of `opencascade-tools`:
 
@@ -34,7 +34,7 @@ Get the version number of `opencascade-tools` as installed on your machine:
 opencascade-tools --version
 ```
 
-#### Specific functions
+#### ⚙️ Specific functions
 
 Convert STEP file to OBJ file, GLTF file, or GLB file with standard values for the parameters of the triangulation algorithm:
 
@@ -54,7 +54,7 @@ Convert STEP file to OBJ file, GLTF file, or GLB file with custom value for the 
 opencascade-tools --format <obj|gltf|glb> --angDeflection 1 <path/to/stepFile>
 ```
 
-### Application programming interface (API)
+### 🖥️ Application programming interface (API)
 
 Convert STEP file to OBJ file, GLTF file, and GLB file with standard values for the parameters of the triangulation algorithm:
 
@@ -101,7 +101,7 @@ async function run() {
 run()
 ```
 
-## Developer guide
+## 📙 Developer guide
 
 Clone the Git repository:
 
