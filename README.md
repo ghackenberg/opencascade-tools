@@ -14,6 +14,22 @@ npm install -g opencascade-tools
 
 ### Command line interface (CLI)
 
+#### General functions
+
+Get help on how to use the command line interface of `opencascade-tools`:
+
+```
+opencascade-tools --help
+```
+
+Get the version number of `opencascade-tools` as installed on your machine:
+
+```
+opencascade-tools --version
+```
+
+#### Specific functions
+
 Convert STEP file to OBJ file, GLTF file, or GLB file with standard values for the parameters of the triangulation algorithm:
 
 ```
