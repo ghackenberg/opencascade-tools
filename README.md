@@ -2,7 +2,7 @@
 
 This project provides an **easy-to-use wrapper** around [Open CASCADE Technology](https://www.opencascade.com/open-cascade-technology/), a powerful free and open source computer-aided design (CAD) kernel. The project is based on [OpenCascade.js](https://github.com/donalffons/opencascade.js/), a WebAssembly port of the original native C++ library.
 
-For now, you can use `opencascade-tools` to convert [STEP files](https://en.wikipedia.org/wiki/ISO_10303-21) into [OBJ files](https://en.wikipedia.org/wiki/Wavefront_.obj_file) (Wavefront Technologies) as well as [GLTF/GLB files](https://en.wikipedia.org/wiki/GlTF) (Khronos Group). In the future, we plan to add more functionality depending on community requests.
+For now, you can use `opencascade-tools` to convert [IGES files](https://en.wikipedia.org/wiki/IGES) and [STEP files](https://en.wikipedia.org/wiki/ISO_10303-21) into [OBJ files](https://en.wikipedia.org/wiki/Wavefront_.obj_file) (Wavefront Technologies) and [GLTF/GLB files](https://en.wikipedia.org/wiki/GlTF) (Khronos Group). In the future, we plan to add more functionality depending on community requests.
 
 Below you find a short *user guide* and an even shorter *developer guide* 😉.
 
@@ -36,22 +36,22 @@ opencascade-tools --version
 
 #### ⚙️ Specific functions
 
-Convert STEP file to OBJ file, GLTF file, or GLB file with standard values for the parameters of the triangulation algorithm:
+Convert IGES file or STEP file to OBJ file, GLTF file, or GLB file with standard values for the parameters of the triangulation algorithm:
 
 ```
-opencascade-tools --format <obj|gltf|glb> <path/to/stepFile>
+opencascade-tools --format <obj|gltf|glb> <path/to/igesOrStepFile>
 ```
 
-Convert STEP file to OBJ file, GLTF file, or GLB file with custom value for the linear deflection parameter of the triangulation algorithm:
+Convert IGES file or STEP file to OBJ file, GLTF file, or GLB file with custom value for the linear deflection parameter of the triangulation algorithm:
 
 ```
-opencascade-tools --format <obj|gltf|glb> --linDeflection 1 <path/to/stepFile>
+opencascade-tools --format <obj|gltf|glb> --linDeflection 1 <path/to/igesOrStepFile>
 ```
 
-Convert STEP file to OBJ file, GLTF file, or GLB file with custom value for the angular deflection parameter of the triangulation algorithm:
+Convert IGES file or STEP file to OBJ file, GLTF file, or GLB file with custom value for the angular deflection parameter of the triangulation algorithm:
 
 ```
-opencascade-tools --format <obj|gltf|glb> --angDeflection 1 <path/to/stepFile>
+opencascade-tools --format <obj|gltf|glb> --angDeflection 1 <path/to/igesOrStepFile>
 ```
 
 ### 🖥️ Application programming interface (API)
@@ -59,12 +59,14 @@ opencascade-tools --format <obj|gltf|glb> --angDeflection 1 <path/to/stepFile>
 Convert STEP file to OBJ file, GLTF file, and GLB file with standard values for the parameters of the triangulation algorithm:
 
 ```ts
-import { init, readStep, triangulate, writeObj, writeGltf, writeGlb } from 'opencascade-tools'
+import { init, readIgesFile, readStepFile, triangulate, writeObjFile, writeGltfFile, writeGlbFile } from 'opencascade-tools'
 
 async function run() {
     const oc = await init()
 
-    const docHandle = readStep(oc, '<path/to/stepFile>')
+    const docHandle = readIgesFile(oc, '<path/to/igesFile>')
+    // or
+    const docHandle = readStepFile(oc, '<path/to/stepFile>')
 
     triangulate(oc, docHandle.get())
 
@@ -79,19 +81,21 @@ run()
 Convert STEP file to OBJ file, GLTF file, and GLB file with custom values for the parameters of the triangulation algorithm:
 
 ```ts
-import { init, readStep, triangulate, writeObj, writeGltf, writeGlb } from 'opencascade-tools'
+import { init, readIgesFile, readStepFile, triangulate, writeObjFile, writeGltfFile, writeGlbFile } from 'opencascade-tools'
 
 async function run() {
     const oc = await init()
+
+    const docHandle = readIgesFile(oc, '<path/to/igesFile>')
+    // or
+    const docHandle = readStepFile(oc, '<path/to/stepFile>')
 
     const linDeflection = 0.1
     const isRelative = false
     const angDeflection = 0.1
     const isInParallel = false
 
-    const docHandle = readStep(oc, '<path/to/stepFile>', linDeflection, isRelative, angDeflection, isInParallel)
-
-    triangulate(oc, docHandle.get())
+    triangulate(oc, docHandle.get(), linDeflection, isRelative, angDeflection, isInParallel)
 
     writeObjFile(oc, docHandle, '<path/to/objFile>')
     writeGltfFile(oc, docHandle, '<path/to/gltfFile>')
