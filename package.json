@@ -1,6 +1,6 @@
 {
     "name": "opencascade-tools",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "description": "Easy-to-use wrapper around OpenCASCADE Technology",
     "license": "MIT",
     "type": "module",
@@ -41,7 +41,7 @@
     "scripts": {
         "clean": "rimraf bin && rimraf dts",
         "build": "tsc",
-        "test": "npm run clean && npm run build && npm install -g . && npm run test-all",
+        "test": "npm run deploy-local && npm run test-all",
         "test-all": "npm run test-help && npm run test-version && npm run test-iges && npm run test-step",
         "test-help": "opencascade-tools --help",
         "test-version": "opencascade-tools --version",
@@ -53,7 +53,8 @@
         "test-step-obj": "opencascade-tools --format obj --linDeflection 1 --angDeflection 5 ./test/step-example.stp",
         "test-step-gltf": "opencascade-tools --format gltf --linDeflection 1 --angDeflection 5 ./test/step-example.stp",
         "test-step-glb": "opencascade-tools --format glb --linDeflection 1 --angDeflection 5 ./test/step-example.stp",
-        "publish": "npm run clean && npm run build && npm publish"
+        "deploy-local": "npm run clean && npm run build && npm install -g .",
+        "deploy-global": "npm run clean && npm run build && npm publish"
     },
     "dependencies": {
         "commander": "^10.0.0",

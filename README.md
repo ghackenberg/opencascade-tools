@@ -119,14 +119,54 @@ Install development and production dependencies:
 cd opencascade-tools && npm install
 ```
 
-Run test cases defined in `package.json`:
+Afterwards you can use the following *scripts*:
+
+### 🖥️ Scripts
+
+Remove JavaScript binaries and TypeScript type definitions from previous builds:
+
+```
+cd opencascade-tools && npm run clean
+```
+
+Compile TypeScript sources to JavaScript binaries and TypeScript type definitions:
+
+```
+cd opencascade-tools && npm run build
+```
+
+Install your version of `opencascade-tools` into local NPM registry:
+
+```
+cd opencascade-tools && npm run deploy-local
+```
+
+Run all test cases with local installation of `opencascade-tools`:
+
+```
+cd opencascade-tools && npm run test-all
+```
+
+Run IGES test cases with local installation of `opencascade-tools`:
+
+```
+cd opencascade-tools && npm run test-iges
+```
+
+Run STEP test cases with local installation of `opencascade-tools`:
+
+```
+cd opencascade-tools && npm run test-step
+```
+
+Shorthand for clean, build, deploy local and run all test cases (see above scripts):
 
 ```
 cd opencascade-tools && npm run test
 ```
 
-Compile TypeScript sources to JavaScript "binaries":
+Shorthand for clean, build, and publish to global NPM registry (see above scripts):
 
 ```
-cd opencascade-tools && npm run build
+cd opencascade-tools && npm run deploy-global
 ```
