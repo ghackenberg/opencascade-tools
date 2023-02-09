@@ -40,14 +40,16 @@
     },
     "scripts": {
         "clean": "rimraf bin && rimraf dts",
-        "test": "npm run test-help && npm run test-version && npm run test-obj && npm run test-gltf && npm run test-glb",
-        "test-help": "ts-node-esm ./src/main.ts --help",
-        "test-version": "ts-node-esm ./src/main.ts --version",
-        "test-obj": "ts-node-esm ./src/main.ts --format obj --linDeflection 1 --angDeflection 5 ./test/hauser.stp",
-        "test-gltf": "ts-node-esm ./src/main.ts --format gltf --linDeflection 1 --angDeflection 5 ./test/hauser.stp",
-        "test-glb": "ts-node-esm ./src/main.ts --format glb --linDeflection 1 --angDeflection 5 ./test/hauser.stp",
         "build": "tsc",
-        "deploy": "npm run clean && npm run build && npm publish"
+        "test": "npm run clean && npm run build && npm install -g . && npm run test-all",
+        "test-all": "npm run test-help && npm run test-version && npm run test-stp",
+        "test-help": "opencascade-tools --help",
+        "test-version": "opencascade-tools --version",
+        "test-stp": "npm run test-stp-obj && npm run test-stp-gltf && npm run test-stp-glb",
+        "test-stp-obj": "opencascade-tools --format obj --linDeflection 1 --angDeflection 5 ./test/hauser.stp",
+        "test-stp-gltf": "opencascade-tools --format gltf --linDeflection 1 --angDeflection 5 ./test/hauser.stp",
+        "test-stp-glb": "opencascade-tools --format glb --linDeflection 1 --angDeflection 5 ./test/hauser.stp",
+        "publish": "npm run clean && npm run build && npm publish"
     },
     "dependencies": {
         "commander": "^10.0.0",

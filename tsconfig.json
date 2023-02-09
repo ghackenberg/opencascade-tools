@@ -7,6 +7,7 @@
         "skipLibCheck": true,
         "declaration": true,
         "declarationDir": "dts",
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "listEmittedFiles": true
     }
 }
