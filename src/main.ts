@@ -7,6 +7,7 @@ import { Handle_TDocStd_Document, OpenCascadeInstance } from 'opencascade.js/dis
 import { basename, dirname, extname, resolve } from "path"
 import { fileURLToPath } from 'url'
 import { init, readIgesFile, readStepFile, triangulate, writeGlbFile, writeGltfFile, writeObjFile } from './api/node.js'
+import { print } from './lib/tree.js'
 
 const packPath = resolve(dirname(fileURLToPath(import.meta.url)), "..", "package.json")
 const packData = readFileSync(packPath, 'utf-8')
@@ -58,6 +59,8 @@ async function run({format, linDeflection, isRelative, angDeflection, isInParall
     console.info(`Processing source file`, sourcePath)
     
     const stepDocHandle = readSourceFile(oc, sourcePath)
+
+    print(oc, stepDocHandle.get())
 
     triangulate(oc, stepDocHandle.get(), parseFloat(linDeflection), isRelative, parseFloat(angDeflection), isInParallel)
 
