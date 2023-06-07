@@ -21,51 +21,76 @@ interface Options {
     isRelative: boolean
     angDeflection: string
     isInParallel: boolean
+    input: string[]
+    output: string
 }
 
-async function run({format, linDeflection, isRelative, angDeflection, isInParallel}: Options, sourcePath: string) {
-
-    const ext = extname(sourcePath)
-
-    let readSourceFile: (oc: OpenCascadeInstance, sourcePath: string) => Handle_TDocStd_Document
-
-    if (ext == ".iges") {
-        readSourceFile = readIgesFile
-    } else if (ext == ".stp" || ext == ".step") {
-        readSourceFile = readStepFile
-    } else {
-        throw "Source file format is not supported!"
-    }
-
-    let targetPath: string
-
-    let writeTargetFile: (oc: OpenCascadeInstance, docHandle: Handle_TDocStd_Document, targetPath: string) => void
-
-    if (format == "obj") {
-        targetPath = `${dirname(sourcePath)}/${basename(sourcePath, ext)}.obj`
-        writeTargetFile = writeObjFile
-    } else if (format == "gltf") {
-        targetPath = `${dirname(sourcePath)}/${basename(sourcePath, ext)}.gltf`
-        writeTargetFile = writeGltfFile
-    } else if (format == "glb") {
-        targetPath = `${dirname(sourcePath)}/${basename(sourcePath, ext)}.glb`
-        writeTargetFile = writeGlbFile
-    } else {
-        throw "Target file format is not supported!"
-    }
+async function run({format, linDeflection, isRelative, angDeflection, isInParallel, input, output}: Options) {
+    // Load WebAssembly
 
     const oc = await init()
 
-    console.info(`Processing source file`, sourcePath)
+    // Process input files
+
+    for (const inputPath of input) {
+        // Determine read function
+
+        const inputExt = extname(inputPath)
     
-    const stepDocHandle = readSourceFile(oc, sourcePath)
+        let readInputFile: (oc: OpenCascadeInstance, sourcePath: string) => Handle_TDocStd_Document
+    
+        if (inputExt == ".iges") {
+            readInputFile = readIgesFile
+        } else if (inputExt == ".stp" || inputExt == ".step") {
+            readInputFile = readStepFile
+        } else {
+            throw "Input file format is not supported!"
+        }
+        
+        // Determine output path
 
-    print(oc, stepDocHandle.get())
+        let outputPath = output
+    
+        if (!outputPath) {
+            if (format == "obj") {
+                outputPath = `${dirname(inputPath)}/${basename(inputPath, inputExt)}.obj`
+            } else if (format == "gltf") {
+                outputPath = `${dirname(inputPath)}/${basename(inputPath, inputExt)}.gltf`
+            } else if (format == "glb") {
+                outputPath = `${dirname(inputPath)}/${basename(inputPath, inputExt)}.glb`
+            } else {
+                throw "Output file format is not supported!"
+            }       
+        }
 
-    triangulate(oc, stepDocHandle.get(), parseFloat(linDeflection), isRelative, parseFloat(angDeflection), isInParallel)
+        // Determine write function
 
-    writeTargetFile(oc, stepDocHandle, targetPath)
+        const outputExt = extname(outputPath)
+    
+        let writeOutputFile: (oc: OpenCascadeInstance, docHandle: Handle_TDocStd_Document, targetPath: string) => void
 
+        if (outputExt == ".obj") {
+            writeOutputFile = writeObjFile
+        } else if (outputExt == ".gltf") {
+            writeOutputFile = writeGltfFile
+        } else if (outputExt == ".glb") {
+            writeOutputFile = writeGlbFile
+        } else {
+            throw "Output file format is not supported!"
+        }
+
+        // Perform read, triangulate, write
+    
+        console.info(`Reading input file`, inputPath)
+        
+        const stepDocHandle = readInputFile(oc, inputPath)
+    
+        print(oc, stepDocHandle.get())
+    
+        triangulate(oc, stepDocHandle.get(), parseFloat(linDeflection), isRelative, parseFloat(angDeflection), isInParallel)
+    
+        writeOutputFile(oc, stepDocHandle, outputPath)
+    }
 }
 
 figlet(name, (error, result) => {
@@ -81,21 +106,19 @@ figlet(name, (error, result) => {
     program.description(description)
     
     program.option("-d, --debug", "debug flag", false)
-    program.option("-f, --format <obj|gltf|glb>", "target file format", "glb")
     program.option("-l, --linDeflection <number>", "linear deflection value for triangulation algorithm", "0.1")
     program.option("-r, --isRelative", "is relative flag for triangulation algorithm", false)
     program.option("-a, --angDeflection <number>", "angular deflection value for triangulation algorithm", "0.1")
     program.option("-p, --isInParallel", "is in parallel flag for triangulation algorithm", false)
-    
-    program.argument("<sourcePath>", "path to IGES or STEP file")
+    program.option("-i, --input <path...>", "path to one or more IGES or STEP input files")
+    program.option("-o, --output [path]", "path to single OBJ, GTLF, or GLB output file")
+    program.option("-f, --format [obj|gltf|glb]", "output file format", "glb")
     
     program.parse()
     
     const options = program.opts<Options>()
     
-    const sourcePath = program.args[0]
-    
     console.debug = options.debug ? console.debug : () => {}
     
-    run(options, sourcePath)
+    run(options)
 })
