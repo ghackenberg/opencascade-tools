@@ -1,17 +1,17 @@
 import { readFileSync } from "fs"
-import { OpenCascadeInstance } from "opencascade.js/dist/opencascade.full.js"
+import { Handle_TDocStd_Document, OpenCascadeInstance } from "opencascade.js/dist/opencascade.full.js"
 
 const NAME = "file.iges"
 const BASE = "."
 const PATH = `${BASE}/${NAME}`
 
-export function readIgesFile(oc: OpenCascadeInstance, path: string) {
+export function readIgesFile(oc: OpenCascadeInstance, path: string, docHandle: Handle_TDocStd_Document = null) {
     const data = readFileSync(path, "ascii")
 
-    return readIgesData(oc, data)   
+    return readIgesData(oc, data, docHandle)   
 }
 
-export function readIgesData(oc: OpenCascadeInstance, data: string) {
+export function readIgesData(oc: OpenCascadeInstance, data: string, docHandle: Handle_TDocStd_Document = null) {
     console.log("> Reading IGES")
 
     console.debug("  > Creating reader")
@@ -30,14 +30,16 @@ export function readIgesData(oc: OpenCascadeInstance, data: string) {
         throw 'Could not read IGES file'
     }
 
-    console.debug("  > Creating format")
-    const format = new oc.TCollection_ExtendedString_1()
-
-    console.debug("  > Creating document")
-    const doc = new oc.TDocStd_Document(format)
-
-    console.debug("  > Creating handle")
-    const docHandle = new oc.Handle_TDocStd_Document_2(doc)
+    if (docHandle == null) {
+        console.debug("  > Creating format")
+        const format = new oc.TCollection_ExtendedString_1()
+    
+        console.debug("  > Creating document")
+        const doc = new oc.TDocStd_Document(format)
+    
+        console.debug("  > Creating handle")
+        docHandle = new oc.Handle_TDocStd_Document_2(doc)
+    }
 
     console.debug("  > Creating progress")
     const progress = new oc.Message_ProgressRange_1()

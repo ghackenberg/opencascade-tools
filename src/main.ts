@@ -25,6 +25,52 @@ interface Options {
     output: string
 }
 
+function selectReadFile(inputPath: string) {
+    const inputExt = extname(inputPath)
+    if (inputExt == ".iges") {
+        return readIgesFile
+    } else if (inputExt == ".stp" || inputExt == ".step") {
+        return readStepFile
+    } else {
+        throw "Input file format is not supported!"
+    }
+}
+
+function selectOutputPath(inputPath: string, format: string) {
+    if (format == "obj") {
+        return `${dirname(inputPath)}/${basename(inputPath, extname(inputPath))}.obj`
+    } else if (format == "gltf") {
+        return `${dirname(inputPath)}/${basename(inputPath, extname(inputPath))}.gltf`
+    } else if (format == "glb") {
+        return `${dirname(inputPath)}/${basename(inputPath, extname(inputPath))}.glb`
+    } else {
+        throw "Output file format is not supported!"
+    }
+}
+
+function selectWriteFile(outputPath: string) {
+    const outputExt = extname(outputPath)
+    if (outputExt == ".obj") {
+        return writeObjFile
+    } else if (outputExt == ".gltf") {
+        return writeGltfFile
+    } else if (outputExt == ".glb") {
+        return writeGlbFile
+    } else {
+        throw "Output file format is not supported!"
+    }
+}
+
+function processDocument(oc: OpenCascadeInstance, docHandle: Handle_TDocStd_Document, linDeflection: number, isRelative: boolean, angDeflection: number, isInParallel: boolean, outputPath: string) {
+    print(oc, docHandle.get())
+
+    triangulate(oc, docHandle.get(), linDeflection, isRelative, angDeflection, isInParallel)
+
+    const writeOutputFile = selectWriteFile(outputPath)
+
+    writeOutputFile(oc, docHandle, outputPath)
+}
+
 async function run({format, linDeflection, isRelative, angDeflection, isInParallel, input, output}: Options) {
     // Load WebAssembly
 
@@ -32,64 +78,32 @@ async function run({format, linDeflection, isRelative, angDeflection, isInParall
 
     // Process input files
 
+    let docHandle: Handle_TDocStd_Document = null
+
     for (const inputPath of input) {
-        // Determine read function
+        // Read input file
+    
+        const readInputFile = selectReadFile(inputPath)
+    
+        console.info(`Processing input file`, inputPath)
 
-        const inputExt = extname(inputPath)
-    
-        let readInputFile: (oc: OpenCascadeInstance, sourcePath: string) => Handle_TDocStd_Document
-    
-        if (inputExt == ".iges") {
-            readInputFile = readIgesFile
-        } else if (inputExt == ".stp" || inputExt == ".step") {
-            readInputFile = readStepFile
-        } else {
-            throw "Input file format is not supported!"
-        }
+        docHandle = readInputFile(oc, inputPath, docHandle)
         
-        // Determine output path
-
-        let outputPath = output
-    
-        if (!outputPath) {
-            if (format == "obj") {
-                outputPath = `${dirname(inputPath)}/${basename(inputPath, inputExt)}.obj`
-            } else if (format == "gltf") {
-                outputPath = `${dirname(inputPath)}/${basename(inputPath, inputExt)}.gltf`
-            } else if (format == "glb") {
-                outputPath = `${dirname(inputPath)}/${basename(inputPath, inputExt)}.glb`
-            } else {
-                throw "Output file format is not supported!"
-            }       
-        }
-
-        // Determine write function
-
-        const outputExt = extname(outputPath)
-    
-        let writeOutputFile: (oc: OpenCascadeInstance, docHandle: Handle_TDocStd_Document, targetPath: string) => void
-
-        if (outputExt == ".obj") {
-            writeOutputFile = writeObjFile
-        } else if (outputExt == ".gltf") {
-            writeOutputFile = writeGltfFile
-        } else if (outputExt == ".glb") {
-            writeOutputFile = writeGlbFile
-        } else {
-            throw "Output file format is not supported!"
-        }
-
-        // Perform read, triangulate, write
-    
-        console.info(`Reading input file`, inputPath)
+        // Print, triangulate and write output files
         
-        const stepDocHandle = readInputFile(oc, inputPath)
-    
-        print(oc, stepDocHandle.get())
-    
-        triangulate(oc, stepDocHandle.get(), parseFloat(linDeflection), isRelative, parseFloat(angDeflection), isInParallel)
-    
-        writeOutputFile(oc, stepDocHandle, outputPath)
+        if (!output) {
+            const outputPath = selectOutputPath(inputPath, format)
+
+            processDocument(oc, docHandle, parseFloat(linDeflection), isRelative, parseFloat(angDeflection), isInParallel, outputPath)
+
+            docHandle = null
+        }
+    }
+        
+    // Print, triangulate and write output file
+
+    if (output) {
+        processDocument(oc, docHandle, parseFloat(linDeflection), isRelative, parseFloat(angDeflection), isInParallel, output)
     }
 }
 

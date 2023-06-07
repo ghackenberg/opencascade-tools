@@ -1,17 +1,17 @@
 import { readFileSync } from "fs"
-import { OpenCascadeInstance } from "opencascade.js/dist/opencascade.full.js"
+import { Handle_TDocStd_Document, OpenCascadeInstance } from "opencascade.js/dist/opencascade.full.js"
 
 const NAME = "file.stp"
 const BASE = "."
 const PATH = `${BASE}/${NAME}`
 
-export function readStepFile(oc: OpenCascadeInstance, path: string) {
+export function readStepFile(oc: OpenCascadeInstance, path: string, docHandle: Handle_TDocStd_Document = null) {
     const data = readFileSync(path, "ascii")
 
-    return readStepData(oc, data)   
+    return readStepData(oc, data, docHandle)   
 }
 
-export function readStepData(oc: OpenCascadeInstance, data: string) {
+export function readStepData(oc: OpenCascadeInstance, data: string, docHandle: Handle_TDocStd_Document = null) {
     console.log("> Reading STEP")
 
     console.debug("  > Creating reader")
@@ -30,14 +30,16 @@ export function readStepData(oc: OpenCascadeInstance, data: string) {
         throw 'Could not read STEP file'
     }
 
-    console.debug("  > Creating format")
-    const format = new oc.TCollection_ExtendedString_1()
-
-    console.debug("  > Creating document")
-    const doc = new oc.TDocStd_Document(format)
-
-    console.debug("  > Creating handle")
-    const docHandle = new oc.Handle_TDocStd_Document_2(doc)
+    if (docHandle == null) {
+        console.debug("  > Creating format")
+        const format = new oc.TCollection_ExtendedString_1()
+    
+        console.debug("  > Creating document")
+        const doc = new oc.TDocStd_Document(format)
+    
+        console.debug("  > Creating handle")
+        docHandle = new oc.Handle_TDocStd_Document_2(doc)
+    }
 
     console.debug("  > Creating progress")
     const progress = new oc.Message_ProgressRange_1()
