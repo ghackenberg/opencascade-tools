@@ -39,19 +39,19 @@ opencascade-tools --version
 Convert IGES file or STEP file to OBJ file, GLTF file, or GLB file with standard values for the parameters of the triangulation algorithm:
 
 ```
-opencascade-tools --format <obj|gltf|glb> <path/to/igesOrStepFile>
+opencascade-tools --format <obj|gltf|glb> --input <path/to/igesOrStepFile> --output <path/to/objOrGltfOrGlbFile>
 ```
 
 Convert IGES file or STEP file to OBJ file, GLTF file, or GLB file with custom value for the linear deflection parameter of the triangulation algorithm:
 
 ```
-opencascade-tools --format <obj|gltf|glb> --linDeflection 1 <path/to/igesOrStepFile>
+opencascade-tools --format <obj|gltf|glb> --linDeflection 1 --input <path/to/igesOrStepFile> --output <path/to/objOrGltfOrGlbFile>
 ```
 
 Convert IGES file or STEP file to OBJ file, GLTF file, or GLB file with custom value for the angular deflection parameter of the triangulation algorithm:
 
 ```
-opencascade-tools --format <obj|gltf|glb> --angDeflection 1 <path/to/igesOrStepFile>
+opencascade-tools --format <obj|gltf|glb> --angDeflection 1 --input <path/to/igesOrStepFile> --output <path/to/objOrGltfOrGlbFile>
 ```
 
 ### 🖥️ Application programming interface (API)
