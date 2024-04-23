@@ -80,7 +80,7 @@ async function run({format, linDeflection, isRelative, angDeflection, isInParall
 
     let docHandle: Handle_TDocStd_Document = null
 
-    for (const inputPath of input) {
+    for (const inputPath of input || []) {
         // Read input file
     
         const readInputFile = selectReadFile(inputPath)
